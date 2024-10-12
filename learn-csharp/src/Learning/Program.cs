@@ -1,11 +1,12 @@
 ﻿using LearnCsharp.Classes;
+using LearnCsharp.Enums;
 using LearnCsharp.Structs;
 using Microsoft.VisualBasic;
 
-namespace LearnCsharp;
+namespace LearnCsharp.Learning;
 
 class Program {
-    public static void Main(string[] args) {
+    public static void Entry(string[] args) {
 
         Console.WriteLine("Select a method:");
         Console.WriteLine("1 - CheckedOverflow");
@@ -20,6 +21,8 @@ class Program {
         Console.WriteLine("10 - Structs");
         Console.WriteLine("11 - Arrays");
         Console.WriteLine("12 - Strings");
+        Console.WriteLine("13 - Enums");
+        Console.WriteLine("14 - Reference Types vs Value Types");
 
         string? consoleInput = Console.ReadLine();
         
@@ -59,6 +62,12 @@ class Program {
             break;
             case "12":
                 Strings();
+            break;
+            case "13":
+                Enums();
+            break;
+            case "14":
+                ReferenceValueTypes();
             break;
             default:
                 Console.WriteLine("Invalid option.");
@@ -222,5 +231,40 @@ class Program {
         string somePath = @"c:\some\path";
 
         Console.WriteLine($"\nSome Path: {somePath}");        
+    }
+
+    private static void Enums(){
+        ShippingMethod shippingMethod = ShippingMethod.ExpressAir;
+
+        Console.WriteLine($"\nShipping Method: {(int) shippingMethod}");
+
+        int methodId = 1;
+
+        ShippingMethod parsedMethod = (ShippingMethod) methodId;
+
+        Console.WriteLine($"\nCasted Shipping Method: {parsedMethod}");
+
+        string shippingMethodName = "ExpressAir";
+        ShippingMethod parsedShippingMethod = (ShippingMethod) Enum.Parse(typeof(ShippingMethod), shippingMethodName);
+
+        Console.WriteLine($"\nParsed Shipping Method: {parsedShippingMethod}");
+    }
+
+    private static void ReferenceValueTypes(){
+        // Value is copied for a primitive (Value Type)
+        int a = 10;
+        int b = a;
+        b++;
+
+        Console.WriteLine($"\na: {a}, b: {b}");
+
+        // A reference is stored for a non-primitive (Reference Type)
+        int[] array1 = [1, 2, 3];
+        int[] array2 = array1;
+
+        array2[0] = 0;
+
+        Console.WriteLine($"\nArray1: {string.Join(", ", array1)}");
+        Console.WriteLine($"Array2: {string.Join(", ", array2)}");
     }
 }
