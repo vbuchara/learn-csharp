@@ -145,7 +145,7 @@ public class Iterators
             .Select<string, int?>((stringNumber) =>  int.TryParse(stringNumber, out int number) ? number : null)
             .OfType<int>()
             .ToArray();
-
+            
         int[] orderedNumbers = numbers.OrderBy((number) => number).ToArray();
         
         Console.WriteLine($"\nThe maximum of the numbers is {orderedNumbers.Last()}");
